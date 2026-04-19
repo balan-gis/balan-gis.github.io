@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balan Gunasekaran — Senior GIS Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Fraunces:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e0d;
+    --surface: #111815;
+    --card: #141c1a;
+    --border: #1e2e2a;
+    --accent: #3dffa0;
+    --accent2: #00c97a;
+    --accent-dim: rgba(61,255,160,0.08);
+    --text: #e8f0ec;
+    --muted: #7a9990;
+    --highlight: #b2ffd8;
+    --gold: #ffb43d;
+    --blue: #3da0ff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(61,255,160,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(61,255,160,0.015) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(10,14,13,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.6rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(61,255,160,0.12) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+    animation: pulse 6s ease-in-out infinite;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,201,122,0.07) 0%, transparent 70%);
+    bottom: 0; left: 10%;
+    pointer-events: none;
+    animation: pulse 8s ease-in-out infinite reverse;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 860px; }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(61,255,160,0.3);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.6s ease both;
+  }
+
+  .hero-name {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    animation: slideUp 0.8s ease 0.1s both;
+  }
+
+  .hero-name span { color: var(--accent); }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    animation: slideUp 0.8s ease 0.2s both;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    animation: slideUp 0.8s ease 0.25s both;
+  }
+
+  .badge {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+  }
+
+  .badge-gis { background: rgba(61,255,160,0.1); color: var(--accent); border: 1px solid rgba(61,255,160,0.25); }
+  .badge-biz { background: rgba(255,180,61,0.1); color: var(--gold); border: 1px solid rgba(255,180,61,0.3); }
+  .badge-uav { background: rgba(61,160,255,0.1); color: var(--blue); border: 1px solid rgba(61,160,255,0.25); }
+
+  .hero-summary {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 580px;
+    margin-bottom: 3rem;
+    line-height: 1.9;
+    animation: slideUp 0.8s ease 0.3s both;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    animation: slideUp 0.8s ease 0.4s both;
+  }
+
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  .hero-cta { display: flex; gap: 1rem; animation: slideUp 0.8s ease 0.5s both; }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--highlight); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(61,255,160,0.25); }
+
+  .btn-outline {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: transparent;
+    color: var(--accent);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(61,255,160,0.4);
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--accent); background: var(--accent-dim); transform: translateY(-2px); }
+
+  .map-decoration {
+    position: absolute;
+    right: 3rem; top: 50%;
+    transform: translateY(-50%);
+    width: 340px; height: 340px;
+    opacity: 0.12;
+    pointer-events: none;
+    animation: fadeIn 1.5s ease 0.8s both;
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3rem;
+    line-height: 1.15;
+  }
+
+  .divider { width: 100%; height: 1px; background: var(--border); }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.2rem 1.5rem;
+    border-radius: 4px;
+    transition: all 0.25s;
+  }
+
+  .skill-card:hover { border-color: var(--accent2); background: var(--accent-dim); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+
+  .skill-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+  .skill-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600; color: var(--highlight); margin-bottom: 0.2rem; }
+  .skill-sub { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+  /* TOOLS */
+  .tools-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 3rem; }
+  .tools-inner { max-width: 1100px; margin: 0 auto; }
+  .tools-grid { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+
+  .tool-tag {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--card);
+    transition: all 0.2s;
+  }
+
+  .tool-tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; padding-left: 2rem; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3.5rem;
+    padding-left: 2rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease;
+  }
+
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.4rem; top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px rgba(61,255,160,0.5);
+  }
+
+  .job-meta { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.4rem; flex-wrap: wrap; }
+  .job-period { font-size: 11px; letter-spacing: 0.1em; color: var(--accent); }
+  .job-location { font-size: 11px; color: var(--muted); }
+  .job-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+  .job-company { font-size: 12px; color: var(--accent2); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+
+  .client-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.9rem; }
+  .client-label { font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+
+  .client-tag {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    background: rgba(255,180,61,0.08);
+    color: var(--gold);
+    border: 1px solid rgba(255,180,61,0.25);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+  }
+
+  .job-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .job-bullets li { font-size: 13px; color: var(--muted); padding-left: 1.2rem; position: relative; line-height: 1.6; }
+  .job-bullets li::before { content: '›'; position: absolute; left: 0; color: var(--accent); }
+
+  /* BUSINESS DEVELOPMENT */
+  .bizdev-intro {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    padding: 1.8rem 2.2rem;
+    border-radius: 4px;
+    margin-bottom: 2.5rem;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+
+  .bizdev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+
+  .bizdev-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.8rem;
+    border-radius: 4px;
+    transition: all 0.25s;
+  }
+
+  .bizdev-card:hover {
+    border-color: rgba(255,180,61,0.4);
+    background: rgba(255,180,61,0.04);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+
+  .bizdev-icon { font-size: 1.5rem; margin-bottom: 0.7rem; }
+  .bizdev-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+  .bizdev-desc { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+  /* PRESENTATIONS */
+  .pres-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+
+  .pres-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+
+  .pres-card:hover { border-color: var(--accent2); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+
+  .pres-thumb {
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pres-thumb-geoai { background: linear-gradient(135deg, #0a1a28 0%, #0d2b1e 100%); }
+  .pres-thumb-mining { background: linear-gradient(135deg, #1a0e00 0%, #1c1800 100%); }
+  .pres-thumb-uav { background: linear-gradient(135deg, #071428 0%, #0b1c2e 100%); }
+
+  .pres-thumb svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.18; }
+  .pres-thumb-emoji { position: relative; z-index: 1; }
+
+  .pres-body { padding: 1.5rem; }
+  .pres-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+  .pres-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; line-height: 1.3; }
+  .pres-role { font-size: 11px; color: var(--gold); margin-bottom: 0.8rem; letter-spacing: 0.06em; }
+  .pres-desc { font-size: 12px; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; }
+
+  .pres-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .pres-tag {
+    font-size: 10px;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    background: var(--accent-dim);
+    color: var(--accent2);
+    border: 1px solid rgba(61,255,160,0.15);
+  }
+
+  /* EDUCATION */
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    transition: all 0.25s;
+  }
+
+  .edu-card:hover { border-color: var(--accent2); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .edu-year { font-size: 11px; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.8rem; }
+  .edu-degree { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+  .edu-school { font-size: 12px; color: var(--muted); margin-bottom: 1rem; }
+  .edu-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* CONTACT */
+  .contact-section { background: var(--surface); border-top: 1px solid var(--border); padding: 5rem 3rem; text-align: center; }
+  .contact-inner { max-width: 600px; margin: 0 auto; }
+  .contact-info { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 2.5rem; }
+  .contact-item { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+  .contact-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .contact-value { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); }
+
+  footer { text-align: center; padding: 2rem; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); letter-spacing: 0.1em; }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    nav { padding: 0.8rem 1.2rem; }
+    .nav-links { gap: 0.8rem; }
+    #hero { padding: 6rem 1.5rem 4rem; }
+    section { padding: 4rem 1.5rem; }
+    .map-decoration { display: none; }
+    .hero-stats { gap: 1.5rem; }
+    .tools-section { padding: 3rem 1.5rem; }
+    .contact-section { padding: 4rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">BG // GIS</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#bizdev">Biz Dev</a></li>
+    <li><a href="#presentations">Presentations</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <svg class="map-decoration" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="170" cy="170" r="160" stroke="#3dffa0" stroke-width="0.5"/>
+    <circle cx="170" cy="170" r="120" stroke="#3dffa0" stroke-width="0.5"/>
+    <circle cx="170" cy="170" r="80" stroke="#3dffa0" stroke-width="0.5"/>
+    <circle cx="170" cy="170" r="40" stroke="#3dffa0" stroke-width="0.5"/>
+    <line x1="10" y1="170" x2="330" y2="170" stroke="#3dffa0" stroke-width="0.5"/>
+    <line x1="170" y1="10" x2="170" y2="330" stroke="#3dffa0" stroke-width="0.5"/>
+    <line x1="57" y1="57" x2="283" y2="283" stroke="#3dffa0" stroke-width="0.3" stroke-dasharray="4 6"/>
+    <line x1="283" y1="57" x2="57" y2="283" stroke="#3dffa0" stroke-width="0.3" stroke-dasharray="4 6"/>
+    <circle cx="170" cy="170" r="5" fill="#3dffa0"/>
+    <circle cx="230" cy="120" r="3" fill="#3dffa0" opacity="0.6"/>
+    <circle cx="110" cy="220" r="3" fill="#3dffa0" opacity="0.6"/>
+    <circle cx="200" cy="230" r="2" fill="#3dffa0" opacity="0.4"/>
+    <circle cx="130" cy="100" r="2" fill="#3dffa0" opacity="0.4"/>
+    <polyline points="110,220 170,170 230,120 200,230" stroke="#3dffa0" stroke-width="0.5" stroke-dasharray="3 5" opacity="0.5"/>
+    <text x="80" y="175" fill="#3dffa0" font-size="8" font-family="monospace" opacity="0.5">23.4°N</text>
+    <text x="175" y="295" fill="#3dffa0" font-size="8" font-family="monospace" opacity="0.5">78.9°E</text>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-tag">📍 India — Available for Opportunities</div>
+    <h1 class="hero-name">Balan<br><span>Gunasekaran</span></h1>
+    <p class="hero-title">Senior GIS Analyst</p>
+    <div class="hero-badges">
+      <span class="badge badge-gis">Geospatial Engineer</span>
+      <span class="badge badge-uav">UAV &amp; LiDAR Specialist</span>
+      <span class="badge badge-biz">Business Development</span>
+    </div>
+    <p class="hero-summary">
+      6 years transforming complex spatial data into actionable intelligence across environmental, urban planning, utilities, and infrastructure projects. Expert in UAV Photogrammetry, LiDAR processing, and geospatial workflows — with a growing focus on bridging technical expertise with business strategy and client growth.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Client Brands</div>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get in Touch</a>
+      <a href="#experience" class="btn-outline">View Work</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">// 01 — Expertise</p>
+  <h2 class="section-title">Technical Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card"><div class="skill-icon">🗺️</div><div class="skill-name">ArcGIS Suite</div><div class="skill-sub">ArcGIS Pro, ArcPy, ArcGIS Online</div></div>
+    <div class="skill-card"><div class="skill-icon">🌍</div><div class="skill-name">QGIS</div><div class="skill-sub">WebGIS, QGIS2Web, Plugins</div></div>
+    <div class="skill-card"><div class="skill-icon">🐍</div><div class="skill-name">Python</div><div class="skill-sub">ArcPy, Automation, Batch Processing</div></div>
+    <div class="skill-card"><div class="skill-icon">✈️</div><div class="skill-name">Photogrammetry</div><div class="skill-sub">Agisoft, Pix4D, DJI Terra, Leica</div></div>
+    <div class="skill-card"><div class="skill-icon">📡</div><div class="skill-name">LiDAR Processing</div><div class="skill-sub">Point Cloud, DEM/DTM, LAStools</div></div>
+    <div class="skill-card"><div class="skill-icon">🛢️</div><div class="skill-name">Spatial Databases</div><div class="skill-sub">PostGIS, PostgreSQL, Oracle</div></div>
+    <div class="skill-card"><div class="skill-icon">🌿</div><div class="skill-name">Google Earth Engine</div><div class="skill-sub">Remote Sensing, Raster Analysis</div></div>
+    <div class="skill-card"><div class="skill-icon">🔧</div><div class="skill-name">FME &amp; ETL</div><div class="skill-sub">Data Transformation &amp; Automation</div></div>
+    <div class="skill-card"><div class="skill-icon">☁️</div><div class="skill-name">AWS</div><div class="skill-sub">EC2, S3 Cloud Infrastructure</div></div>
+    <div class="skill-card"><div class="skill-icon">📐</div><div class="skill-name">AutoCAD</div><div class="skill-sub">Technical Drawing &amp; Planning</div></div>
+    <div class="skill-card"><div class="skill-icon">🌐</div><div class="skill-name">WebGIS</div><div class="skill-sub">Cesium, Mapbox, GeoServer</div></div>
+    <div class="skill-card"><div class="skill-icon">🏗️</div><div class="skill-name">iTwin Capture</div><div class="skill-sub">3D Reality Capture &amp; Visualization</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TOOLS -->
+<div class="tools-section">
+  <div class="tools-inner">
+    <p class="section-label" style="margin-bottom:1.5rem;">// Tools &amp; Technologies</p>
+    <div class="tools-grid">
+      <span class="tool-tag">ArcGIS Pro</span><span class="tool-tag">QGIS</span><span class="tool-tag">Python</span><span class="tool-tag">ArcPy</span>
+      <span class="tool-tag">PostGIS</span><span class="tool-tag">PostgreSQL</span><span class="tool-tag">Google Earth Engine</span>
+      <span class="tool-tag">Agisoft Metashape</span><span class="tool-tag">Pix4D</span><span class="tool-tag">DJI Terra</span>
+      <span class="tool-tag">Leica Mapfactory</span><span class="tool-tag">Context Capture</span><span class="tool-tag">FME</span>
+      <span class="tool-tag">LAStools</span><span class="tool-tag">CloudCompare</span><span class="tool-tag">Spatix</span>
+      <span class="tool-tag">Microstation</span><span class="tool-tag">AWS EC2/S3</span><span class="tool-tag">Oracle</span>
+      <span class="tool-tag">AutoCAD</span><span class="tool-tag">iTwin Capture</span><span class="tool-tag">Cesium</span>
+      <span class="tool-tag">Mapbox</span><span class="tool-tag">GeoServer</span><span class="tool-tag">GeoJSON</span><span class="tool-tag">Model Builder</span>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">// 02 — Career</p>
+  <h2 class="section-title">Work Experience</h2>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="job-meta">
+        <span class="job-period">06/2024 – 12/2025</span>
+        <span class="job-location">📍 Riyadh, Saudi Arabia</span>
+      </div>
+      <div class="job-title">Data Processing Specialist — GIS</div>
+      <div class="job-company">AMAI</div>
+      <div class="client-row">
+        <span class="client-label">Clients:</span>
+        <span class="client-tag">ILF</span>
+        <span class="client-tag">IoT2</span>
+        <span class="client-tag">Assystem</span>
+        <span class="client-tag">Parsons</span>
+      </div>
+      <ul class="job-bullets">
+        <li>Prepared and shared GeoJSON layers with the Data Architecture team to build AI models for visual pollution identification.</li>
+        <li>Built and tested vector layers in ArcGIS Online to showcase visual pollution demos to clients including Assystem and Parsons.</li>
+        <li>Conducted topographical and hydrological site analysis for solar and wind power land suitability assessments.</li>
+        <li>Prepared land-use maps, base maps, and zoning proposals using ArcGIS/QGIS/AutoCAD to analyze development potential.</li>
+        <li>Reviewed building proposals for compliance with town planning guidelines and zoning regulations.</li>
+        <li>Delivered post-project support, troubleshooting, and client training on GIS data usage and visualization.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="job-meta">
+        <span class="job-period">01/2022 – 05/2024</span>
+        <span class="job-location">📍 Bangalore, India</span>
+      </div>
+      <div class="job-title">GIS Project Coordinator</div>
+      <div class="job-company">AEREO</div>
+      <div class="client-row">
+        <span class="client-label">Clients:</span>
+        <span class="client-tag">Tata Steel</span>
+        <span class="client-tag">APSSLRR</span>
+        <span class="client-tag">KASSLR</span>
+        <span class="client-tag">SVAMITVA</span>
+      </div>
+      <ul class="job-bullets">
+        <li>Developed photogrammetry workflow and QC procedures for drone data handling for Tata Steel asset management and mining projects.</li>
+        <li>Processed LiDAR data including point cloud classification, DEM/DTM generation, and feature extraction using LAStools and CloudCompare.</li>
+        <li>Automated data checks and quality reports with Python/ArcPy, creating reusable scripts and testing baselines.</li>
+        <li>Configured PostgreSQL/PostGIS spatial databases integrating property boundary layers with tax records for APSSLRR and KASSLR land records projects.</li>
+        <li>Developed interactive WebGIS dashboards with QGIS2Web and GeoServer for real-time Tata Steel mining visualization.</li>
+        <li>Managed in-house 2D/3D visualization platform using Cesium and Mapbox; worked with AWS EC2 and S3.</li>
+        <li>Created custom Python tools for batch-processing UAV datasets in Metashape, significantly reducing manual processing time.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="job-meta">
+        <span class="job-period">02/2021 – 09/2021</span>
+        <span class="job-location">📍 Chennai, India</span>
+      </div>
+      <div class="job-title">GIS Engineer</div>
+      <div class="job-company">Agira Technologies</div>
+      <ul class="job-bullets">
+        <li>Led geospatial digitization of urban features using QGIS on satellite imagery, cross-referencing Google Street View for precision.</li>
+        <li>Integrated Google Satellite basemaps with QGIS plugins for pan-India polygon digitization and mapping initiatives.</li>
+        <li>Executed end-to-end verification in GIS-tax integration, correcting business data discrepancies at scale.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="job-meta">
+        <span class="job-period">10/2020 – 12/2020</span>
+        <span class="job-location">📍 Chennai, India</span>
+      </div>
+      <div class="job-title">GIS Consultant</div>
+      <div class="job-company">Detect Technologies</div>
+      <div class="client-row">
+        <span class="client-label">Client:</span>
+        <span class="client-tag">APDC</span>
+      </div>
+      <ul class="job-bullets">
+        <li>Generated and estimated volumetric changes using UAV DTM to compare terrain across time periods for APDC.</li>
+        <li>Vectorized features for topographical map surveys and land information documentation.</li>
+        <li>Conducted software tests for thermal image processing applications.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="job-meta">
+        <span class="job-period">02/2020 – 05/2020</span>
+        <span class="job-location">📍 Bangalore, India</span>
+      </div>
+      <div class="job-title">Junior Coordinator</div>
+      <div class="job-company">WS Atkins</div>
+      <ul class="job-bullets">
+        <li>Created topography vector maps of utilities — Telecom, Electricity, and Gas — to monitor connectivity trails.</li>
+        <li>Extracted spatial data to enhance business platform information for client requirements.</li>
+        <li>Performed quality checks and updated outputs in the OSM database.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="job-meta">
+        <span class="job-period">03/2018 – 12/2019</span>
+        <span class="job-location">📍 Chennai, India</span>
+      </div>
+      <div class="job-title">GIS Engineer</div>
+      <div class="job-company">Gyokap</div>
+      <ul class="job-bullets">
+        <li>Operated UAVs for aerial photography, videography, and site inspections including pre-flight planning and risk assessment.</li>
+        <li>Classified hotspots such as manufacturing and logistic defects to generate actionable field reports.</li>
+        <li>Collaborated with field teams to develop standardized data collection protocols and workflows.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BUSINESS DEVELOPMENT -->
+<section id="bizdev">
+  <p class="section-label">// 03 — Strategic Interest</p>
+  <h2 class="section-title">Business Development</h2>
+
+  <div class="bizdev-intro">
+    Beyond technical delivery, I bring a growing focus on the <strong style="color:var(--highlight);">commercial and strategic side of geospatial solutions</strong>. With direct exposure to enterprise clients across mining, infrastructure, renewable energy, and government sectors, I understand how to position GIS and UAV capabilities as revenue-generating tools. I am actively developing skills in client relationship management, solution scoping, market analysis, and competitive positioning within the geospatial industry.
+  </div>
+
+  <div class="bizdev-grid">
+    <div class="bizdev-card">
+      <div class="bizdev-icon">🤝</div>
+      <div class="bizdev-title">Client Relationship Management</div>
+      <div class="bizdev-desc">Served as primary point of contact for Tata Steel, Assystem, Parsons, and government bodies. Managed stakeholder expectations, delivered progress updates, and ensured project quality aligned with business goals.</div>
+    </div>
+    <div class="bizdev-card">
+      <div class="bizdev-icon">📊</div>
+      <div class="bizdev-title">GeoAI Market Analysis</div>
+      <div class="bizdev-desc">Researched and presented a GeoAI market analysis identifying growth sectors: smart cities, utilities, transport, agriculture, and defence. Positioned spatial intelligence as a strategic enterprise decision-making asset.</div>
+    </div>
+    <div class="bizdev-card">
+      <div class="bizdev-icon">🧩</div>
+      <div class="bizdev-title">Solution Scoping &amp; Demos</div>
+      <div class="bizdev-desc">Translated technical GIS capabilities into client-facing deliverables — live demos, proof-of-concepts, and ArcGIS Online visualizations for ILF, IoT2, and other AMAI stakeholders.</div>
+    </div>
+    <div class="bizdev-card">
+      <div class="bizdev-icon">💡</div>
+      <div class="bizdev-title">Platform &amp; Product Thinking</div>
+      <div class="bizdev-desc">Contributed to in-house platform strategy for 2D/3D geospatial visualization using Cesium and Mapbox. Built mining dashboards serving both technical users and executive decision-makers.</div>
+    </div>
+    <div class="bizdev-card">
+      <div class="bizdev-icon">📈</div>
+      <div class="bizdev-title">Revenue &amp; Delivery Tracking</div>
+      <div class="bizdev-desc">Maintained execution trackers and progress documentation to support billing cycles and client acceptance at AEREO — directly tied to payment milestones across major government land records projects.</div>
+    </div>
+    <div class="bizdev-card">
+      <div class="bizdev-icon">🌍</div>
+      <div class="bizdev-title">Cross-sector Market Knowledge</div>
+      <div class="bizdev-desc">Hands-on project delivery across mining (Tata Steel), renewables (solar/wind), agriculture and land records (SVAMITVA, APSSLRR), urban planning, and government compliance — spanning India and Saudi Arabia.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRESENTATIONS -->
+<section id="presentations">
+  <p class="section-label">// 04 — Thought Leadership</p>
+  <h2 class="section-title">Presentations &amp; Technical Writeups</h2>
+
+  <div class="pres-grid">
+
+    <div class="pres-card">
+      <div class="pres-thumb pres-thumb-geoai">
+        <svg viewBox="0 0 300 130"><circle cx="150" cy="65" r="55" stroke="#3dffa0" stroke-width="0.6" fill="none"/><circle cx="150" cy="65" r="35" stroke="#3dffa0" stroke-width="0.4" fill="none"/><line x1="0" y1="65" x2="300" y2="65" stroke="#3dffa0" stroke-width="0.4"/><line x1="150" y1="0" x2="150" y2="130" stroke="#3dffa0" stroke-width="0.4"/><circle cx="150" cy="65" r="4" fill="#3dffa0" opacity="0.8"/></svg>
+        <span class="pres-thumb-emoji">🤖</span>
+      </div>
+      <div class="pres-body">
+        <div class="pres-label">Market Analysis · Business Strategy</div>
+        <div class="pres-title">GeoAI in GIS: The Next Big Market Shift</div>
+        <div class="pres-role">Role: Data Business Analyst</div>
+        <div class="pres-desc">Analyzes how artificial intelligence is transforming maps into predictive decision systems. Covers the GeoAI market landscape, industry growth opportunities across smart cities, utilities, agriculture, transport, and defence — with a business lens on strategic value and ROI. </div>
+        <div class="pres-tags">
+          <span class="pres-tag">GeoAI</span>
+          <span class="pres-tag">Market Growth</span>
+          <span class="pres-tag">Smart Cities</span>
+          <span class="pres-tag">Predictive Modeling</span>
+          <span class="pres-tag">Business Strategy</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pres-card">
+      <div class="pres-thumb pres-thumb-mining">
+        <svg viewBox="0 0 300 130"><rect x="20" y="15" width="260" height="100" stroke="#ffb43d" stroke-width="0.6" fill="none" rx="2"/><line x1="20" y1="45" x2="280" y2="45" stroke="#ffb43d" stroke-width="0.3"/><line x1="20" y1="75" x2="280" y2="75" stroke="#ffb43d" stroke-width="0.3"/><line x1="90" y1="15" x2="90" y2="115" stroke="#ffb43d" stroke-width="0.3"/><line x1="190" y1="15" x2="190" y2="115" stroke="#ffb43d" stroke-width="0.3"/></svg>
+        <span class="pres-thumb-emoji">⛏️</span>
+      </div>
+      <div class="pres-body">
+        <div class="pres-label">Technical Writeup · Platform Architecture</div>
+        <div class="pres-title">GIS Monitoring Platform for Dept. of Mines</div>
+        <div class="pres-role">Role: GIS Analyst</div>
+        <div class="pres-desc">Enterprise-grade web GIS platform for real-time mine monitoring, lease analytics, and revenue tracking. Covers full architecture — PostGIS data layer to React/Maps UI — with QA/QC framework, OGC standards (WMS/WFS), AI anomaly detection, and government cloud deployment strategy.</div>
+        <div class="pres-tags">
+          <span class="pres-tag">PostGIS</span>
+          <span class="pres-tag">GeoServer</span>
+          <span class="pres-tag">AI Anomaly Detection</span>
+          <span class="pres-tag">Gov Cloud</span>
+          <span class="pres-tag">OGC Standards</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pres-card">
+      <div class="pres-thumb pres-thumb-uav">
+        <svg viewBox="0 0 300 130"><circle cx="150" cy="65" r="48" stroke="#3da0ff" stroke-width="0.6" fill="none"/><circle cx="150" cy="65" r="5" fill="#3da0ff" opacity="0.6"/><line x1="90" y1="35" x2="150" y2="65" stroke="#3da0ff" stroke-width="0.5" stroke-dasharray="3 4"/><line x1="210" y1="35" x2="150" y2="65" stroke="#3da0ff" stroke-width="0.5" stroke-dasharray="3 4"/><line x1="150" y1="113" x2="150" y2="65" stroke="#3da0ff" stroke-width="0.5" stroke-dasharray="3 4"/></svg>
+        <span class="pres-thumb-emoji">🚁</span>
+      </div>
+      <div class="pres-body">
+        <div class="pres-label">Technical Presentation · UAV &amp; Remote Sensing</div>
+        <div class="pres-title">UAV &amp; LiDAR Products for Smart Mapping</div>
+        <div class="pres-role">Role: GIS Analyst / UAV Specialist</div>
+        <div class="pres-desc">Comprehensive walkthrough of how aerial data is collected, processed, and converted into actionable geospatial products. Covers the full UAV-LiDAR workflow — flight planning, GCPs, IMU calibration, point cloud classification, DEM/DTM generation, orthomosaics, and volumetric models.</div>
+        <div class="pres-tags">
+          <span class="pres-tag">LiDAR</span>
+          <span class="pres-tag">Photogrammetry</span>
+          <span class="pres-tag">DEM/DTM</span>
+          <span class="pres-tag">Orthomosaic</span>
+          <span class="pres-tag">Workflow Design</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">// 05 — Academic</p>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-year">2013 – 2017</div>
+      <div class="edu-degree">B.E. Geoinformatics</div>
+      <div class="edu-school">Regional Campus of Anna University, Tirunelveli</div>
+      <div class="edu-desc">Comprehensive study of GIS principles, spatial data analysis, data modeling, and geospatial database management. Participated in GIS course survey camp and collaborated with PWD projects.</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2011 – 2013</div>
+      <div class="edu-degree">Higher Secondary (HSC)</div>
+      <div class="edu-school">St. Antony's Matric Hr. Sec. School, Thiruthuraipoondi</div>
+      <div class="edu-desc">Completed higher secondary education with a strong academic foundation.</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2010 – 2011</div>
+      <div class="edu-degree">Secondary School (SSLC)</div>
+      <div class="edu-school">St. Antony's Matric Hr. Sec. School, Thiruthuraipoondi</div>
+      <div class="edu-desc">Completed secondary school education.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <p class="section-label" style="text-align:center;">// 06 — Connect</p>
+    <h2 class="section-title" style="margin-bottom:0.5rem;">Let's Work Together</h2>
+    <p style="color:var(--muted); font-size:13px; line-height:1.8;">Open to GIS Analyst, Remote Sensing, Geospatial Data, and Business Development roles globally. Available for on-site and remote opportunities.</p>
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <a class="contact-value" href="mailto:ikbalan02@gmail.com">ikbalan02@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Phone</span>
+        <span class="contact-value">+91 73389 61060</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Location</span>
+        <span class="contact-value">India, IN</span>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;">
+      <a href="mailto:ikbalan02@gmail.com" class="btn-primary">Send a Message</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 Balan Gunasekaran — Senior GIS Analyst &amp; Business Development &nbsp;·&nbsp; Built with precision, just like a good map.
+</footer>
+
+<script>
+  const items = document.querySelectorAll('.timeline-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  items.forEach(i => observer.observe(i));
+
+  const allSections = document.querySelectorAll('section[id], #hero');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    allSections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+    links.forEach(l => { l.style.color = l.getAttribute('href') === '#' + current ? 'var(--accent)' : ''; });
+  });
+</script>
+
+</body>
+</html>
